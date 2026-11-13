@@ -184,9 +184,9 @@ Play Store yolu henüz kurulmadı. Sıradaki adım Play Console'dur.
 Play Console hesabı tek seferlik 25 ABD dolarıdır. Yerel vergi eklenebilir.
 Play sürümü release imza, ikon, gizlilik politikası ve erişilebilirlik beyanı ister.
 Ret riski vardır; ücret iade edilmez.
+Release imzası için `docs/RELEASE_IMZA.md` dosyasına bak.
 
 ## 🧪 Test
-
 1. `gradlew.bat assembleDebug` komutunu çalıştır.
 2. `adb connect TV_IP:5555` ile TV'ye bağlan.
 3. TV APK'sını kur ve izinleri ver.

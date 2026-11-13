@@ -187,3 +187,7 @@ Play sürümü release imza, ikon ve gizlilik politikası ister.
 Play, erişilebilirlik kullanımı için beyan ve uygulama içi onay ister.
 Bu yol henüz kurulmadı.
 
+## 9. Release imzası
+
+Release keystore ve AAB/APK imzalama için `docs/RELEASE_IMZA.md` dosyasına bak.
+
