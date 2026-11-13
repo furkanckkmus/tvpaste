@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TVPaste</string>
+
+    <string name="status_searching">TV aranıyor...</string>
+    <string name="status_found">TV bulundu: %1$s</string>
+    <string name="status_not_found">TV bulunamadı (elle IP girebilirsin)</string>
+
+    <string name="message_hint">Gönderilecek metin</string>
+    <string name="paste">Panodan Yapıştır</string>
+    <string name="clear">Temizle</string>
+    <string name="send">GÖNDER</string>
+
+    <string name="manual_ip_label">Elle IP gir (ör. 192.168.1.25)</string>
+    <string name="manual_ip_hint">192.168.1.25</string>
+
+    <string name="toast_not_found_yet">TV henüz bulunamadı</string>
+    <string name="toast_sent">Gönderildi</string>
+    <string name="toast_no_field">TV\'de seçili metin alanı yok</string>
+    <string name="toast_unreachable">TV\'ye ulaşılamadı</string>
+    <string name="toast_http_error">TV hata döndü (%1$d)</string>
+    <string name="toast_empty">Gönderilecek metin boş</string>
+    <string name="toast_clipboard_empty">Pano boş</string>
+</resources>

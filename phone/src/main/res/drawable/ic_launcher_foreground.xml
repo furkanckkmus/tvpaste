@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Televizyon govdesi -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,34h38a8,8 0,0 1,8 8v22a8,8 0,0 1,-8 8h-38a8,8 0,0 1,-8 -8v-22a8,8 0,0 1,8 -8z" />
+
+    <!-- Ekran -->
+    <path
+        android:fillColor="#0B1220"
+        android:pathData="M33,41h42a4,4 0,0 1,4 4v14a4,4 0,0 1,-4 4h-42a4,4 0,0 1,-4 -4v-14a4,4 0,0 1,4 -4z" />
+
+    <!-- Metin satirlari -->
+    <path
+        android:pathData="M36,48h22M36,55h30"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M36,62h12"
+        android:strokeColor="#67E8F9"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+
+    <!-- Ayak -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,72h8v6h-8z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M42,78h24a2,2 0,0 1,0 4h-24a2,2 0,0 1,0 -4z" />
+</vector>

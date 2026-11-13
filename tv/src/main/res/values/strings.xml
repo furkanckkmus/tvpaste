@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TVPaste</string>
+    <string name="ready">TVPaste hazır</string>
+    <string name="accessibility_status_off">Erişilebilirlik servisi: KAPALI</string>
+    <string name="accessibility_status_on">Erişilebilirlik servisi: AÇIK</string>
+    <string name="server_running">Sunucu: ÇALIŞIYOR</string>
+    <string name="server_stopped">Sunucu: ÇALIŞMIYOR</string>
+    <string name="address_format">Adres: %1$s:%2$d</string>
+    <string name="address_unknown">Adres: bulunamadı</string>
+    <string name="web_format">Web: http://%1$s:%2$d</string>
+    <string name="web_unknown">Web: bulunamadı</string>
+    <string name="warning_service">Servis çalışmıyor. ADB ile açın veya TV ayarlarından erişilebilirliği kontrol edin.</string>
+    <string name="accessibility_description">TVPaste, gelen metni TV ekranındaki seçili metin alanına yazar.</string>
+</resources>

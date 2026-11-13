@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eaf2ff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07111f" media="(prefers-color-scheme: dark)">
+<title>TVPaste</title>
+<style>
+:root{color-scheme:light dark;--bg1:#eaf2ff;--bg2:#f8fafc;--card:rgba(255,255,255,.86);--input:#fff;--fg:#0f172a;--muted:#64748b;--line:#d7e0ee;--accent:#2563eb;--accent2:#0e7490;--accent-fg:#fff;--ok:#15803d;--err:#b91c1c;--ring:rgba(37,99,235,.18);--shadow:0 24px 60px rgba(15,23,42,.14)}
+:root[data-theme="dark"]{color-scheme:dark;--bg1:#07111f;--bg2:#0b1220;--card:rgba(15,23,42,.82);--input:#0f172a;--fg:#e2e8f0;--muted:#94a3b8;--line:#243249;--accent:#38bdf8;--accent2:#0e7490;--accent-fg:#04121f;--ok:#4ade80;--err:#f87171;--ring:rgba(56,189,248,.2);--shadow:0 24px 60px rgba(0,0,0,.45)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg1:#07111f;--bg2:#0b1220;--card:rgba(15,23,42,.82);--input:#0f172a;--fg:#e2e8f0;--muted:#94a3b8;--line:#243249;--accent:#38bdf8;--accent2:#0e7490;--accent-fg:#04121f;--ok:#4ade80;--err:#f87171;--ring:rgba(56,189,248,.2);--shadow:0 24px 60px rgba(0,0,0,.45)}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 15% 0%,var(--bg1),transparent 55%),linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;transition:background .4s,color .3s}
+.card{width:100%;max-width:520px;padding:20px;border:1px solid var(--line);border-radius:24px;background:var(--card);box-shadow:var(--shadow);backdrop-filter:blur(16px);animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+.head{display:flex;align-items:center;gap:12px}
+.logo{width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,#0b1220,#0e7490);box-shadow:0 8px 20px rgba(14,116,144,.35);animation:glow 4s ease-in-out infinite}
+.logo svg{width:27px;height:27px}
+h1{margin:0;font-size:1.45rem;letter-spacing:-.02em}
+.sub{margin:2px 0 0;color:var(--muted);font-size:.82rem}
+.theme{margin-left:auto;width:44px;height:44px;border:1px solid var(--line);border-radius:14px;background:transparent;color:var(--fg);font-size:1.2rem;cursor:pointer;transition:transform .15s,background .2s}
+.theme:hover{background:var(--ring)}
+.theme:active{transform:scale(.94)}
+.hint{display:flex;align-items:center;gap:8px;margin:16px 2px 8px;color:var(--muted);font-size:.9rem}
+.hint i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--ring)}
+#text{width:100%;min-height:34vh;padding:14px;border:1.5px solid var(--line);border-radius:16px;background:var(--input);color:var(--fg);font:inherit;font-size:1.05rem;line-height:1.5;resize:vertical;outline:none;transition:border-color .2s,box-shadow .2s}
+#text:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
+#text::placeholder{color:var(--muted)}
+#send{position:relative;overflow:hidden;width:100%;margin-top:12px;padding:18px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-fg);font:inherit;font-size:1.12rem;font-weight:800;letter-spacing:.04em;cursor:pointer;box-shadow:0 12px 26px rgba(37,99,235,.28);transition:transform .12s,box-shadow .2s,opacity .2s}
+#send:hover{box-shadow:0 14px 30px rgba(37,99,235,.36)}
+#send:active{transform:scale(.985)}
+#send:disabled{cursor:default;opacity:.78;transform:none}
+#send.sending{padding-right:52px}
+#send.sending::after{content:"";position:absolute;right:18px;top:50%;width:18px;height:18px;margin-top:-9px;border:2px solid rgba(255,255,255,.4);border-top-color:var(--accent-fg);border-radius:50%;animation:spin .8s linear infinite}
+#clear{margin-top:10px;padding:12px 18px;border:1px solid var(--line);border-radius:14px;background:transparent;color:var(--muted);font:inherit;font-size:.95rem;cursor:pointer;transition:background .2s,color .2s}
+#clear:hover{background:var(--ring);color:var(--fg)}
+#status{display:flex;align-items:center;gap:8px;min-height:24px;margin:14px 2px 0;font-size:.95rem;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s}
+#status.show{opacity:1;transform:none}
+#status.ok{color:var(--ok)}
+#status.err{color:var(--err)}
+#status.show::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes glow{0%,100%{box-shadow:0 8px 20px rgba(14,116,144,.35)}50%{box-shadow:0 8px 30px rgba(56,189,248,.45)}}
+@media (max-width:420px){body{padding:12px}.card{padding:16px;border-radius:20px}#send{padding:16px}}
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="head">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4.5" width="18" height="12" rx="2.5"/>
+        <path d="M8 20h8M12 16.5V20"/>
+        <path d="M7 9h10M7 12h6"/>
+        <path d="M7 15h3" stroke="#67e8f9"/>
+      </svg>
+    </div>
+    <div>
+      <h1>TVPaste</h1>
+      <p class="sub">TV'ye yazı gönder</p>
+    </div>
+    <button id="theme" class="theme" type="button" aria-label="Tema değiştir">☾</button>
+  </header>
+
+  <p class="hint"><i></i>Yapıştırmak için kutuya uzun basın.</p>
+  <textarea id="text" placeholder="TV'ye gönderilecek yazı..." autocomplete="off" spellcheck="false" autocapitalize="off"></textarea>
+  <button id="send" type="button">GÖNDER</button>
+  <button id="clear" type="button">Temizle</button>
+  <div id="status" role="status" aria-live="polite"></div>
+</main>
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var text = document.getElementById("text");
+  var send = document.getElementById("send");
+  var clear = document.getElementById("clear");
+  var status = document.getElementById("status");
+  var theme = document.getElementById("theme");
+  var media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+  function savedTheme() {
+    try { return localStorage.getItem("tvpaste-theme"); } catch (e) { return null; }
+  }
+
+  function effectiveDark() {
+    var attr = root.getAttribute("data-theme");
+    if (attr === "dark") return true;
+    if (attr === "light") return false;
+    var saved = savedTheme();
+    if (saved === "dark") return true;
+    if (saved === "light") return false;
+    return media ? media.matches : false;
+  }
+
+  function paintTheme() {
+    var dark = effectiveDark();
+    theme.textContent = dark ? "☀" : "☾";
+    theme.setAttribute("aria-label", dark ? "Açık temaya geç" : "Koyu temaya geç");
+  }
+
+  var startTheme = savedTheme();
+  if (startTheme === "dark" || startTheme === "light") {
+    root.setAttribute("data-theme", startTheme);
+  }
+
+  theme.addEventListener("click", function () {
+    var next = effectiveDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("tvpaste-theme", next); } catch (e) {}
+    paintTheme();
+  });
+
+  if (media && media.addEventListener) {
+    media.addEventListener("change", paintTheme);
+  }
+  paintTheme();
+
+  function setStatus(message, isError) {
+    status.textContent = message;
+    status.className = message ? "show " + (isError ? "err" : "ok") : "";
+  }
+
+  function setSending(value) {
+    send.disabled = value;
+    send.classList.toggle("sending", value);
+    send.textContent = value ? "GÖNDERİLİYOR..." : "GÖNDER";
+  }
+
+  clear.addEventListener("click", function () {
+    text.value = "";
+    setStatus("", false);
+    text.focus();
+  });
+
+  send.addEventListener("click", function () {
+    var value = text.value;
+    if (!value) {
+      setStatus("Önce bir yazı girin", true);
+      return;
+    }
+    if (send.disabled) return;
+
+    setSending(true);
+    setStatus("Gönderiliyor...", false);
+
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, 5000);
+
+    fetch("/send", {
+      method: "POST",
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+      body: value,
+      signal: controller.signal
+    })
+      .then(function (response) {
+        clearTimeout(timer);
+        if (response.status === 200) {
+          text.value = "";
+          setStatus("Gönderildi", false);
+        } else if (response.status === 409) {
+          setStatus("TV'de seçili metin alanı yok", true);
+        } else {
+          setStatus("TV hata döndü (" + response.status + ")", true);
+        }
+      })
+      .catch(function () {
+        clearTimeout(timer);
+        setStatus("TV'ye ulaşılamadı", true);
+      })
+      .then(function () { setSending(false); });
+  });
+})();
+</script>
+</body>
+</html>
