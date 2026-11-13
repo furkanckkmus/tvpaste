@@ -10,6 +10,7 @@ Tarayıcı da aynı işi yapar; telefon uygulaması şart değildir.
 
 ## 🚀 Hızlı Başlangıç
 Gerekli ortam: Windows, JDK 21, Android SDK ve aynı Wi-Fi ağı.
+Android Studio `local.properties` dosyasını kendisi oluşturur.
 
 1. Projeyi derle.
 
